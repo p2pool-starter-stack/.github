@@ -8,7 +8,7 @@
 
 ## 🧩 The projects
 
-### 🟠 [P2Pool Starter Stack](https://github.com/p2pool-starter-stack/p2pool-starter-stack) — the orchestrator
+### 🟠 [Pithead](https://github.com/p2pool-starter-stack/pithead) — the orchestrator
 
 A professional-grade, containerized stack that runs a private Monero full node, **P2Pool**, **Tari**
 merge mining, a single mining endpoint, and a live dashboard — all behind **Tor**, in one command.
@@ -30,18 +30,18 @@ service — then points it at your stack.
 - 🧠 **Hardware-aware** — detects your CPU (AMD EPYC, Ryzen X3D, …) and applies a matching performance profile.
 - ⚙️ **Kernel-tuned** — HugePages (1 GB / 2 MB), MSR access, and NUMA binding, done for you.
 - 🔧 **Managed** — runs as a `systemd` service with a performance governor and automatic log rotation.
-- 🔗 **Plug-and-play** — connects to the Starter Stack, or any RandomX Stratum pool.
+- 🔗 **Plug-and-play** — connects to Pithead, or any RandomX Stratum pool.
 
 ### 🔗 How they fit together
 
 ```mermaid
 flowchart LR
-    Rigs["🔥 RigForge miners<br/>(many machines)"] ==>|"hashrate · :3333"| Orc["🟠 P2Pool Starter Stack<br/>(the orchestrator)"]
+    Rigs["🔥 RigForge miners<br/>(many machines)"] ==>|"hashrate · :3333"| Orc["🟠 Pithead<br/>(the orchestrator)"]
     Orc ==>|"merge-mine, over Tor"| Chains["🪙 Monero + Tari"]
     Orc -.->|"bonus rounds"| XvB["🎲 XMRvsBeast"]
 ```
 
-Point as many RigForge miners as you like at a single Starter Stack. The stack handles the nodes,
+Point as many RigForge miners as you like at a single Pithead. The stack handles the nodes,
 privacy, payouts, and optimization; the miners just hash.
 
 ---
@@ -69,7 +69,7 @@ A few principles you'll see throughout the code:
 
 ## 🚀 Start here
 
-- **New to this?** → [**P2Pool Starter Stack**](https://github.com/p2pool-starter-stack/p2pool-starter-stack) gets the whole operation running in one command.
+- **New to this?** → [**Pithead**](https://github.com/p2pool-starter-stack/pithead) gets the whole operation running in one command.
 - **Already have the stack?** → [**RigForge**](https://github.com/p2pool-starter-stack/rigforge) provisions your miners.
 
 Everything here is **MIT-licensed** and built in the open. Issues and pull requests are welcome.
