@@ -1,4 +1,6 @@
-# Private Monero mining, self-hosted — the whole operation 🧅⛏️
+# P2Pool Starter Stack
+
+### Private, self-hosted Monero + Tari mining — the whole operation. 🧅⛏️
 
 > An **orchestrator** and the **miners** that feed it. Two open-source projects for running a
 > private, optimized **Monero + Tari** mining operation on hardware you own — no custodians, no
@@ -13,24 +15,24 @@
 A professional-grade, containerized stack that runs a private Monero full node, **P2Pool**, **Tari**
 merge mining, a single mining endpoint, and a live dashboard — all behind **Tor**, in one command.
 
-- 🧅 **Private by default** — Tor hidden services for Monero, Tari, and P2Pool; no port forwarding, no exposed IP.
-- ⛏️ **Monero + Tari, merge-mined** — earn on both chains at once, with zero extra effort.
-- 🧠 **Algorithmic yield optimization** — continuously splits your hashrate between P2Pool and XMRvsBeast bonus rounds to maximize return.
-- 🔌 **One endpoint for every rig** — all your miners point at a single address; the stack routes hashrate upstream.
-- 📊 **A dashboard that actually tells you things** — live hashrate, sync progress, PPLNS window, and per-worker stats, served over HTTPS on your LAN.
-- 🔒 **Hardened out of the box** — least-privilege containers, SHA256-verified pinned binaries, and tightly scoped Docker-socket proxies.
+- 🧅 **Private by default** — Tor hidden services for Monero, Tari, and P2Pool; your router stays shut and your home IP is never advertised to an inbound peer.
+- ⛏️ **Monero + Tari, merge-mined** — every hash mines Monero on zero-fee P2Pool and merge-mines Tari at once: a second payout for zero extra power or config.
+- 🧠 **Algorithmic yield optimization** — watches the XMRvsBeast raffle and shifts hashrate to grab bonus rounds, donating only the minimum to hold your tier, then handing every spare cycle back to your own P2Pool payouts.
+- 🔌 **One endpoint for every rig** — all your miners point at a single address; no wallet in the miner, no per-rig pool config.
+- 📊 **A dashboard worth leaving open** — live hashrate, the P2Pool/XvB split shading in real time, the PPLNS window, an honest tier + explicit VIP status, and per-worker stats, served over HTTPS on your LAN.
+- 🔒 **Hardened out of the box** — least-privilege containers, SHA256-verified pinned binaries, and tightly scoped Docker-socket proxies (read-only for stats, start/stop-only for failover).
 
 ### 🔥 [RigForge](https://github.com/p2pool-starter-stack/rigforge) — the miners
 
-Turn any machine into a tuned mining worker in one command. RigForge builds stock **XMRig** from
-source, applies CPU- and kernel-level tuning for maximum RandomX hashrate, and runs it as a managed
-service — then points it at your stack.
+Turn any Ubuntu/Debian — or macOS — machine into a tuned mining worker in one command. RigForge
+compiles stock, commit-pinned **XMRig** from source, applies CPU- and kernel-level tuning for maximum
+RandomX hashrate, and runs it as a managed service — then points it at your stack, or any RandomX pool.
 
-- ⚡ **One command** from bare metal to a running, tuned miner.
-- 🧠 **Hardware-aware** — detects your CPU (AMD EPYC, Ryzen X3D, …) and applies a matching performance profile.
-- ⚙️ **Kernel-tuned** — HugePages (1 GB / 2 MB), MSR access, and NUMA binding, done for you.
-- 🔧 **Managed** — runs as a `systemd` service with a performance governor and automatic log rotation.
-- 🔗 **Plug-and-play** — connects to Pithead, or any RandomX Stratum pool.
+- ⚡ **One command** from bare metal to a running, tuned miner — on Ubuntu/Debian or macOS.
+- 📈 **Measurably faster, and cooler** — +3.5% hashrate and +7.6% efficiency on a Ryzen 7800X3D, measured live against stock XMRig (and +6.6% on a 48-core EPYC).
+- 🧠 **Hardware-aware** — detects your CPU (AMD EPYC, Ryzen X3D, …), applies a matching profile, then live-A/Bs the hardware prefetcher to keep the fastest.
+- ⚙️ **Kernel-tuned (Linux)** — HugePages (1 GB / 2 MB), MSR access, NUMA binding, and a performance governor, done for you.
+- 🔗 **Plug-and-play** — connects to Pithead, or any RandomX Stratum pool. Stock XMRig pinned to a verified commit — no custom binary, idempotent re-runs.
 
 ### 🔗 How they fit together
 
@@ -50,8 +52,9 @@ privacy, payouts, and optimization; the miners just hash.
 
 A few principles you'll see throughout the code:
 
-- **Privacy is the default, not a setting.** Tor-only upstreams, localhost-bound RPC, and no public
-  port forwarding. You opt *out* of privacy — never *in*.
+- **Privacy is the default, not a setting.** Inbound rides Tor hidden services — no port forwarding,
+  your home IP never advertised to a peer — and RPC is localhost-bound. The few outbound paths that
+  still touch clearnet in v1.0 are mapped in the privacy guide and move to Tor-by-default in v1.1.
 - **Least privilege, everywhere.** Capability-scoped containers, a read-only Docker-socket proxy
   kept separate from a start/stop-only one, owner-only secrets. Nothing gets more access than it
   needs.
@@ -72,4 +75,5 @@ A few principles you'll see throughout the code:
 - **New to this?** → [**Pithead**](https://github.com/p2pool-starter-stack/pithead) gets the whole operation running in one command.
 - **Already have the stack?** → [**RigForge**](https://github.com/p2pool-starter-stack/rigforge) provisions your miners.
 
-Everything here is **MIT-licensed** and built in the open. Issues and pull requests are welcome.
+Both projects are at their **v1.0** — RigForge complete, Pithead feature-complete and through its
+release gate. Everything here is **MIT-licensed** and built in the open. Issues and pull requests are welcome.
