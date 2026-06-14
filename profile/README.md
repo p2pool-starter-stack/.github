@@ -2,6 +2,10 @@
 
 ### Mine Monero privately, on hardware you own — the whole operation, in one command. 🧅⛏️
 
+[![Pithead release](https://img.shields.io/github/v/release/p2pool-starter-stack/pithead?sort=semver&display_name=tag&label=Pithead&color=F26822&logo=github)](https://github.com/p2pool-starter-stack/pithead/releases/latest)
+[![RigForge release](https://img.shields.io/github/v/release/p2pool-starter-stack/rigforge?sort=semver&display_name=tag&label=RigForge&color=ff5236&logo=github)](https://github.com/p2pool-starter-stack/rigforge/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](https://github.com/p2pool-starter-stack)
+
 > Two open-source projects for running a **private, optimized Monero + Tari mining operation** at
 > home: an **orchestrator** ([Pithead](https://github.com/p2pool-starter-stack/pithead)) and the
 > **miners** that feed it ([RigForge](https://github.com/p2pool-starter-stack/rigforge)). Decentralized,
