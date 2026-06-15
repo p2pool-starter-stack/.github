@@ -12,7 +12,7 @@
 > **zero-fee P2Pool** payouts straight to your own wallet, all behind **Tor** — no custodians, no
 > exposed home IP, no pool fees, no hand-tuning.
 
-**🌐 [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io/)**  ·  free & MIT  ·  no token  ·  no premine  ·  no VC  ·  Tor-first
+**🌐 [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io/)**  ·  free & MIT  ·  Tor-first  ·  self-hosted
 
 ---
 
@@ -40,7 +40,7 @@ RandomX hashrate, and runs it as a managed service — then points it at your st
 - 📈 **Measurably faster, and cooler** — +3.5% hashrate and +7.6% efficiency on a Ryzen 7800X3D, measured live against stock XMRig (and +6.6% on a 48-core EPYC).
 - 🧠 **Hardware-aware** — detects your CPU (AMD EPYC, Ryzen X3D, …), applies a matching profile, then live-A/Bs the hardware prefetcher to keep the fastest.
 - ⚙️ **Kernel-tuned (Linux)** — HugePages (1 GB / 2 MB), MSR access, NUMA binding, and a performance governor, done for you.
-- 🔗 **Plug-and-play** — connects to Pithead, or any RandomX Stratum pool. Stock XMRig pinned to a verified commit — no custom binary, a 0% dev fee, idempotent re-runs.
+- 🔗 **Plug-and-play** — connects to Pithead, or any RandomX Stratum pool. Stock XMRig pinned to a verified commit — no custom binary; keeps XMRig's standard 1% dev fee (funds upstream XMRig), one line to disable; idempotent re-runs.
 
 ### 🔗 How they fit together
 
@@ -75,9 +75,9 @@ the network pays block rewards straight to your own wallet. The stack runs your 
 get decentralized, zero-fee payouts without the fiddly setup.
 
 **Is it free? Are there any fees?**
-Yes — free and MIT-licensed. P2Pool charges no pool fee, and RigForge compiles stock XMRig with the
-dev-fee pinned to 0%. No token, no premine, no VC — just an optional Monero donation if a stack saves
-you time.
+Yes — free and MIT-licensed, and P2Pool charges no pool fee. RigForge keeps XMRig's standard 1% dev
+fee — that funds the upstream XMRig project, not us — and makes it one line to turn off. The only
+optional extra is a Monero donation if a stack saves you time.
 
 **Can I point my existing XMRig miners at it?**
 Yes — point any XMRig or RandomX rig at the stack's single endpoint (`host:3333`), no wallet in the
