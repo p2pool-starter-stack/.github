@@ -121,3 +121,14 @@ A few principles you'll see throughout the code:
 
 Both projects are at their **v1.0** — RigForge complete, Pithead feature-complete and through its
 release gate. Everything here is **MIT-licensed** and built in the open. Issues and pull requests are welcome.
+
+---
+
+## 🤝 Donate
+
+If these projects saved you time and you'd like to support the work, donations to this XMR wallet are
+appreciated:
+
+```
+486aGn4qhH1MkaASjnEWMDN7stD1SVtPF5fvihmjffeBE5ACL1u1jU95KxiqmoiaPZMexi4R4W11MLXut66XWVVF8wjAE5R
+```
