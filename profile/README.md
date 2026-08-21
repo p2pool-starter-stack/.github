@@ -23,12 +23,15 @@
 A professional-grade, containerized stack that runs a private Monero full node, **P2Pool**, **Tari**
 merge mining, a single mining endpoint, and a live dashboard — all behind **Tor**, in one command.
 
-- 🧅 **Private by default** — Tor hidden services for Monero, Tari, and P2Pool; your router stays shut and your home IP is never advertised to an inbound peer.
+- 🧅 **Private by default** — Tor hidden services for Monero, Tari, and P2Pool, and all runtime egress routed over Tor; a fail-closed host firewall drops any direct clearnet dial. Your router stays shut, your home IP stays yours.
 - ⛏️ **Monero + Tari, merge-mined** — every hash mines Monero on zero-fee P2Pool and merge-mines Tari at once: a second payout for zero extra power or config.
 - 🧠 **Algorithmic yield optimization** — watches the XMRvsBeast raffle and shifts hashrate to grab bonus rounds, donating only the minimum to hold your tier, then handing every spare cycle back to your own P2Pool payouts.
 - 🔌 **One endpoint for every rig** — all your miners point at a single address; no wallet in the miner, no per-rig pool config.
-- 📊 **A dashboard worth leaving open** — live hashrate, the P2Pool/XvB split shading in real time, the PPLNS window, an honest tier + explicit VIP status, and per-worker stats, served over HTTPS on your LAN.
-- 🔒 **Hardened out of the box** — least-privilege containers, SHA256-verified pinned binaries, and tightly scoped Docker-socket proxies (read-only for stats, start/stop-only for failover).
+- 📊 **A dashboard worth leaving open** — live hashrate, the P2Pool/XvB split shading in real time, per-worker stats, and persistent trends: blocks found, pool luck, reject rates, and expected-vs-confirmed earnings after power costs.
+- 🎛️ **Control from the browser** — opt in to edit any setting from a guided form, retune each rig with versioned history, and one-click upgrade when a release lands — every change host-validated behind a login, with a full audit log.
+- 📟 **An operator bot on call** — Telegram alerts the moment a node or worker drops (and when it recovers), plus a daily digest, read-only status commands, and a Healthchecks dead-man's switch for the failure the box can't report itself.
+- 💾 **Encrypted backups** — one command writes config, secrets, Tor onion keys, and the dashboard's history to an AES-256 archive; restore brings the box back on new hardware with the same onion address.
+- 🔒 **Hardened out of the box** — non-root containers, read-only filesystems, SHA256-verified pinned binaries, digest-pinned images, scoped Docker-socket proxies — and every release cosign-signed end to end.
 
 ### 🔥 [RigForge](https://github.com/p2pool-starter-stack/rigforge) — the miners
 
@@ -66,8 +69,9 @@ no account and no custodian.
 
 **Do I have to forward ports or expose my home IP?**
 No. Monero, Tari, and P2Pool run as Tor hidden services, so inbound peers reach you over an onion
-address and your router stays shut; RPC is localhost-bound. The few outbound yield paths still on
-clearnet in v1.0 are mapped in the privacy guide and move to Tor-by-default in v1.1.
+address and your router stays shut; RPC is localhost-bound. All runtime egress routes over Tor by
+default behind a fail-closed firewall — the few opt-in exceptions, like a faster clearnet initial
+sync, are mapped in the privacy guide.
 
 **What is P2Pool, and why mine to it instead of a centralized pool?**
 P2Pool is a decentralized, peer-to-peer Monero mining pool: no operator, no account, and no pool fee —
@@ -85,7 +89,8 @@ miner. For maximum hashrate, RigForge provisions a kernel-tuned XMRig worker in 
 (+3.5% hashrate / +7.6% efficiency on a Ryzen 7800X3D vs stock).
 
 **What hardware do I need?**
-Stack host: Ubuntu Server 24.04, 16 GB+ RAM, an SSD (~300 GB pruned; 2–4 TB for set-and-forget).
+Stack host: Ubuntu Server 24.04, 16 GB+ RAM, an SSD (~330 GB pruned / ~530 GB full to start — the
+chains grow, so 2–4 TB is set-and-forget).
 Mining itself is CPU-bound — Monero's RandomX runs on any modern AMD/Intel CPU, and large-L3 chips
 (Ryzen X3D, EPYC) shine. RigForge tunes per-CPU automatically.
 
@@ -96,8 +101,8 @@ Mining itself is CPU-bound — Monero's RandomX runs on any modern AMD/Intel CPU
 A few principles you'll see throughout the code:
 
 - **Privacy is the default, not a setting.** Inbound rides Tor hidden services — no port forwarding,
-  your home IP never advertised to a peer — and RPC is localhost-bound. The few outbound paths that
-  still touch clearnet in v1.0 are mapped in the privacy guide and move to Tor-by-default in v1.1.
+  your home IP never advertised to a peer — RPC is localhost-bound, and all runtime egress routes
+  over Tor by default. The opt-in clearnet exceptions are documented in the privacy guide.
 - **Least privilege, everywhere.** Capability-scoped containers, a read-only Docker-socket proxy
   kept separate from a start/stop-only one, owner-only secrets. Nothing gets more access than it
   needs.
@@ -119,8 +124,10 @@ A few principles you'll see throughout the code:
 - **Already have the stack?** → [**RigForge**](https://github.com/p2pool-starter-stack/rigforge) provisions your miners.
 - **Want the overview?** → [**p2pool-starter-stack.github.io**](https://p2pool-starter-stack.github.io/)
 
-Both projects are at their **v1.0** — RigForge complete, Pithead feature-complete and through its
-release gate. Everything here is **MIT-licensed** and built in the open. Issues and pull requests are welcome.
+Both projects ship in the open, release by release — nineteen minor Pithead releases since v1.0,
+with RigForge in lockstep (the badges above always show the latest). Next up: **Pithead OS**, a
+flashable appliance image, in review on Pithead's `develop-v2` branch. Everything here is
+**MIT-licensed** and built in the open. Issues and pull requests are welcome.
 
 ---
 
