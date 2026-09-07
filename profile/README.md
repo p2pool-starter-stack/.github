@@ -124,9 +124,10 @@ A few principles you'll see throughout the code:
 - **Already have the stack?** → [**RigForge**](https://github.com/p2pool-starter-stack/rigforge) provisions your miners.
 - **Want the overview?** → [**p2pool-starter-stack.github.io**](https://p2pool-starter-stack.github.io/)
 
-Both projects ship in the open, release by release — nineteen minor Pithead releases since v1.0,
+Both projects ship in the open, release by release — twenty minor Pithead releases since v1.0,
 with RigForge in lockstep (the badges above always show the latest). Next up: **Pithead OS**, a
-flashable appliance image, in review on Pithead's `develop-v2` branch. Everything here is
+flashable appliance image, in review on Pithead's
+[`develop`](https://github.com/p2pool-starter-stack/pithead/tree/develop) branch. Everything here is
 **MIT-licensed** and built in the open. Issues and pull requests are welcome.
 
 ---
