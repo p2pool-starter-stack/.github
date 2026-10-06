@@ -35,7 +35,8 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
 - **Payouts vary.** P2Pool pays when the pool finds blocks, so payouts swing with mining luck. The
   dashboard's earnings figures are estimates, not guarantees.
 - **No pool fee is not the same as no costs.** RigForge's XMRig donation defaults to 1%, XMRig's
-  own upstream default, and goes to the XMRig project; set `"DONATION": 0` to turn it off. With XvB
+  own upstream default, and goes to the XMRig project; set `"DONATION": 0` before setup to turn it
+  off (on an already-built worker, lowering it needs a rebuild). With XvB
   enabled, Pithead donates part of your hashrate to the XMRvsBeast pool to hold a raffle tier.
   Electricity and hardware are your own costs; once you set an electricity price, the dashboard
   can show power cost and net figures from each rig's measured or manually estimated power draw.
