@@ -29,7 +29,7 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
   your LAN. A node you run on another machine is dialled directly. Install and update downloads
   reveal your IP address to the download host. The optional clearnet initial sync, P2Pool clearnet peering
   and XvB without Tor expose your IP while they are on. P2Pool payout addresses are public, so
-  [use a dedicated mining wallet](https://github.com/SChernykh/p2pool). The
+  [use a dedicated mining wallet](https://github.com/SChernykh/p2pool/releases/tag/v4.18.1). The
   [privacy guide](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/privacy.md) lists
   every connection.
 - **Payouts vary.** P2Pool pays when the pool finds blocks, so payouts swing with mining luck. The
@@ -37,8 +37,8 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
 - **No pool fee is not the same as no costs.** RigForge's XMRig donation defaults to 1%, XMRig's
   own upstream default, and goes to the XMRig project; set `"DONATION": 0` to turn it off. With XvB
   enabled, Pithead donates part of your hashrate to the XMRvsBeast pool to hold a raffle tier.
-  Electricity and hardware are your own costs; the dashboard can estimate power cost from the
-  electricity cost and rig watts you enter.
+  Electricity and hardware are your own costs; once you set an electricity price, the dashboard
+  can show power cost and net figures from each rig's measured or manually estimated power draw.
 - **Tari and XvB.** Pithead can also merge-mine Tari on the same work and switch hashrate for the
   XMRvsBeast raffle. Each has its own configuration, a local Tari node needs its own disk and
   memory, and Tari blocks are found less often than P2Pool's. The latest Pithead release pins Tari 5.3.1;
