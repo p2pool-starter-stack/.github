@@ -8,8 +8,8 @@ Open-source tools for running your own Monero mining setup on hardware you contr
 Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io/)
 
 | Project | What it does |
-|---|---|
-| [Pithead](https://github.com/p2pool-starter-stack/pithead) | Runs a Monero node, [P2Pool](https://github.com/SChernykh/p2pool), Tor, a single mining endpoint for your workers, and a web dashboard, as a Docker Compose stack on Ubuntu Server 24.04 LTS. |
+| --- | --- |
+| [Pithead](https://github.com/p2pool-starter-stack/pithead) | Runs a Monero node, [P2Pool](https://github.com/SChernykh/p2pool), Tor, a single mining endpoint for your workers, and a web dashboard. Use the bootable Pithead OS appliance or the Docker Compose stack on Ubuntu Server 24.04 LTS. |
 | [RigForge](https://github.com/p2pool-starter-stack/rigforge) | Compiles upstream XMRig from source on an Ubuntu or Debian machine, tunes the system for RandomX, and runs the miner as a service. Works with Pithead or any RandomX Stratum pool. |
 
 ## Why run it
@@ -22,6 +22,12 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
   ports.
 - **One endpoint for your rigs.** Point existing XMRig rigs at the stack on port `3333`, with no
   wallet address in the miner config, and follow hashrate and per-worker stats in the dashboard.
+- **Appliance or DIY.** Pithead OS installs from USB and is configured in a browser; the Compose
+  path runs the same stack and dashboard on an Ubuntu host you manage.
+- **Recovery built in.** The appliance installs signed updates to a spare system slot and returns
+  to the previous slot if the new one does not boot cleanly. Encrypted backup and restore, service
+  diagnostics, and setup and recovery options for machines without a monitor are included.
+  System rollback does not undo a one-way database migration; keep backups off the machine.
 
 ## Before you start
 
@@ -40,26 +46,29 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
   enabled, Pithead donates part of your hashrate to the XMRvsBeast pool to hold a raffle tier.
   Electricity and hardware are your own costs; once you set an electricity price, the dashboard
   can show power cost and net figures from each rig's measured or manually estimated power draw.
-- **Tari and XvB.** Pithead can also merge-mine Tari on the same work and switch hashrate for the
-  XMRvsBeast raffle. Each has its own configuration, a local Tari node needs its own disk and
-  memory, and Tari blocks are found less often than P2Pool's. The latest Pithead release pins Tari 5.3.1;
-  Pithead's changelog on `develop` notes that Tari's 6.0 hard fork at block 350,000 leaves older
-  nodes off the canonical chain, and that update is not released yet. See
+- **Tari and XvB are optional beta features.** New installs leave both off. Pithead can merge-mine
+  Tari on the same work and switch hashrate for the XMRvsBeast raffle when you enable them. Each
+  has its own configuration, a local Tari node needs its own disk and memory, and Tari blocks are
+  found less often than P2Pool's. See
   [configuration](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/configuration.md)
   and [hardware requirements](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/hardware.md).
-- **Setup comes before the sync.** `./pithead setup` checks dependencies, asks for your payout
-  addresses, provisions Tor and offers to start the stack. P2Pool and the worker endpoint then wait
-  until the nodes finish their initial blockchain sync. RigForge needs root to install packages and
-  tune the system, and on Linux a reboot to apply HugePages.
+- **Choose the machine's role.** Pithead OS can be a coordinator, a coordinator that also mines on
+  its own CPU, or a mining rig. The appliance uses a browser setup wizard; DIY uses `./pithead setup`.
+  Mining starts after the required nodes finish their initial blockchain sync.
+  RigForge needs root to install packages and tune the system, and on Linux a reboot to apply
+  HugePages.
 - **Wallets in workers.** A worker pointed at Pithead needs no wallet address. For a public pool,
   you set your Monero wallet as the pool user in RigForge's config.
 - **Browser control is opt-in.** Editing configuration, retuning rigs and one-click upgrades from
   the dashboard stay off until you set `dashboard.control.enabled`, and every change sits behind
-  the dashboard login. Retuning a rig also needs a RigForge worker with its token-authenticated
-  control port configured.
-- **Platforms.** Pithead supports Ubuntu Server 24.04 LTS as its host; other systems are not
-  supported. RigForge targets Ubuntu and Debian; its macOS support is deprecated as of 2026-09-14
-  and untested.
+  the dashboard login. Remote rig control is beta and needs a RigForge control token; an appliance
+  rig mines before adoption, but the dashboard cannot change it until you adopt it.
+- **Platforms and hardware.** Pithead OS needs an x86-64 UEFI machine with wired Ethernet and a
+  16 GB+ USB stick. A coordinator needs 16 GB+ RAM and an internal SSD; installation erases the
+  selected disk. A worker-only rig can run from USB and has no chain-storage requirement. The DIY path needs
+  Ubuntu Server 24.04 LTS. Disk needs depend on where the Monero and Tari nodes run; check the
+  [hardware guide](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/hardware.md).
+  RigForge targets Ubuntu and Debian; its macOS support is deprecated as of 2026-09-14 and untested.
 - **Performance figures.** RigForge's
   [benchmarks](https://github.com/p2pool-starter-stack/rigforge/blob/develop/docs/benchmarks.md)
   compare its tuning with stock XMRig on two named CPUs. They measure CPU-package power, not wall
@@ -68,14 +77,14 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
 
 ## Start here
 
-- Run the stack: [Pithead getting started](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/getting-started.md).
+- Install the appliance: [Pithead OS guide](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/appliance.md).
+- Run the Compose stack: [Pithead getting started](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/getting-started.md).
 - Already have XMRig rigs: [connect them](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/workers.md).
 - Provision a tuned worker: [RigForge](https://github.com/p2pool-starter-stack/rigforge).
+- Check current limitations: [Pithead release notes and known issues](https://github.com/p2pool-starter-stack/pithead/releases/latest).
 
-Pithead OS, a bootable appliance image, is in development on Pithead's
-[`develop`](https://github.com/p2pool-starter-stack/pithead/tree/develop) branch and is not
-released yet. The badges above show the latest published releases. Issues and pull requests are
-welcome.
+Both Pithead install paths run the same stack, dashboard, and configuration. The badges above show
+the latest published releases. Issues and pull requests are welcome.
 
 ## License
 
@@ -90,6 +99,6 @@ RigForge compiles upstream XMRig (GPLv3) on your machine. See the license sectio
 If these projects saved you time and you'd like to support the work, donations to this XMR wallet
 are appreciated:
 
-```
+```text
 486aGn4qhH1MkaASjnEWMDN7stD1SVtPF5fvihmjffeBE5ACL1u1jU95KxiqmoiaPZMexi4R4W11MLXut66XWVVF8wjAE5R
 ```
