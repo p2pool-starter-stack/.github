@@ -27,6 +27,7 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
 - **Recovery built in.** The appliance installs signed updates to a spare system slot and returns
   to the previous slot if the new one does not boot cleanly. Encrypted backup and restore, service
   diagnostics, and setup and recovery options for machines without a monitor are included.
+  System rollback does not undo a one-way database migration; keep backups off the machine.
 
 ## Before you start
 
@@ -53,7 +54,7 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
   and [hardware requirements](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/hardware.md).
 - **Choose the machine's role.** Pithead OS can be a coordinator, a coordinator that also mines on
   its own CPU, or a mining rig. The appliance uses a browser setup wizard; DIY uses `./pithead setup`.
-  P2Pool and the worker endpoint then wait until the nodes finish their initial blockchain sync.
+  Mining starts after the required nodes finish their initial blockchain sync.
   RigForge needs root to install packages and tune the system, and on Linux a reboot to apply
   HugePages.
 - **Wallets in workers.** A worker pointed at Pithead needs no wallet address. For a public pool,
@@ -62,8 +63,9 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
   the dashboard stay off until you set `dashboard.control.enabled`, and every change sits behind
   the dashboard login. Remote rig control is beta and needs a RigForge control token; an appliance
   rig mines before adoption, but the dashboard cannot change it until you adopt it.
-- **Platforms and hardware.** Pithead OS needs a dedicated x86-64 UEFI machine with wired Ethernet,
-  16 GB+ RAM, a 16 GB+ USB stick, and an installation disk that will be erased. The DIY path needs
+- **Platforms and hardware.** Pithead OS needs an x86-64 UEFI machine with wired Ethernet and a
+  16 GB+ USB stick. A coordinator needs 16 GB+ RAM and an internal SSD; installation erases the
+  selected disk. A worker-only rig can run from USB and has no chain-storage requirement. The DIY path needs
   Ubuntu Server 24.04 LTS. Disk needs depend on where the Monero and Tari nodes run; check the
   [hardware guide](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/hardware.md).
   RigForge targets Ubuntu and Debian; its macOS support is deprecated as of 2026-09-14 and untested.
@@ -79,7 +81,7 @@ Website: [p2pool-starter-stack.github.io](https://p2pool-starter-stack.github.io
 - Run the Compose stack: [Pithead getting started](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/getting-started.md).
 - Already have XMRig rigs: [connect them](https://github.com/p2pool-starter-stack/pithead/blob/main/docs/workers.md).
 - Provision a tuned worker: [RigForge](https://github.com/p2pool-starter-stack/rigforge).
-- Check current limitations: [Pithead known issues](https://github.com/p2pool-starter-stack/pithead/releases/latest#known-issues-in-200).
+- Check current limitations: [Pithead release notes and known issues](https://github.com/p2pool-starter-stack/pithead/releases/latest).
 
 Both Pithead install paths run the same stack, dashboard, and configuration. The badges above show
 the latest published releases. Issues and pull requests are welcome.
